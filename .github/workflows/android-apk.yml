@@ -26,7 +26,9 @@ jobs:
 
       - name: Extract project
         run: |
-          unzip -q KYTAMILIGY_AI_REELS_Mobile_Build_v0_8.zip -d extracted
+          
+unzip -q KYTAMILIGY_AI_REELS_Android_Starter_v0_7.zip -d extracted
+
 
       - name: Build APK
         working-directory: extracted/KYTAMILIGY_AI_REELS
