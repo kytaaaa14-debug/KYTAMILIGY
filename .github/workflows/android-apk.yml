@@ -27,6 +27,24 @@ jobs:
           gradle-version: '8.9'
 
       - name: Extract project
+      - name: Align Java and Kotlin targets
+        run: |
+          cat >> "$PROJECT_DIR/app/build.gradle.kts" <<'EOF'
+
+          android {
+              compileOptions {
+                  sourceCompatibility = JavaVersion.VERSION_17
+                  targetCompatibility = JavaVersion.VERSION_17
+              }
+          }
+
+          tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+              kotlinOptions {
+                  jvmTarget = "17"
+              }
+          }
+          EOF
+
         run: |
           mkdir extracted
           ZIP_FILE=$(find . -maxdepth 1 -name "*.zip" -print -quit)
